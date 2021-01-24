@@ -40,7 +40,10 @@ const Phonebook = mongoose.model('Phonebook', phonebookSchema);
 
 app.get('/api/persons', (req, res) => {
   const offset = parseInt(req.query.page || 0);
-  Phonebook.paginate({}, {offset: ((offset - 1) * 10), limit: 10})
+  if (offset > 0) {
+    offset--;
+  }
+  Phonebook.paginate({}, {offset: ((offset) * 10), limit: 10})
     .then(result =>{
       res.json(result.docs);
     })

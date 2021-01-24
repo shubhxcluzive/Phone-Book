@@ -39,7 +39,7 @@ phonebookSchema.set('toJSON', {
 const Phonebook = mongoose.model('Phonebook', phonebookSchema);
 
 app.get('/api/persons', (req, res) => {
-  const offset = parseInt(req.query.page || 0);
+  let offset = parseInt(req.query.page || 0);
   if (offset > 0) {
     offset--;
   }
